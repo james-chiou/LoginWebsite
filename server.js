@@ -13,8 +13,8 @@ const MemoryStore = require("memorystore")(session);
 
 // 連結MongoDB
 mongoose
-  // .connect(process.env.MONGODB_CONNECTION)
-  .connect("mongodb://localhost:27017/exampleDB")
+  .connect(process.env.MONGODB_CONNECTION)
+  // .connect("mongodb://localhost:27017/exampleDB")
   .then(() => {
     console.log("Connecting to mongodb...");
   })
