@@ -9,10 +9,12 @@ require("./config/passport");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
+const MemoryStore = require("memorystore")(session);
 
 // 連結MongoDB
 mongoose
-  .connect(process.env.MONGODB_CONNECTION)
+  // .connect(process.env.MONGODB_CONNECTION)
+  .connect("mongodb://localhost:27017/exampleDB")
   .then(() => {
     console.log("Connecting to mongodb...");
   })
@@ -26,10 +28,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
+    store: new MemoryStore({
+      checkPeriod: 86400000, // prune expired entries every 24h
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false },
+    cookie: { secure: false, maxAge: 86400000 },
   })
 );
 app.use(passport.initialize());
