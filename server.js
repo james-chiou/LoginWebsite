@@ -14,7 +14,7 @@ const MemoryStore = require("memorystore")(session);
 // 連結MongoDB
 mongoose
   .connect(process.env.MONGODB_CONNECTION)
-  // .connect("mongodb://localhost:27017/exampleDB")
+  //.connect("mongodb://localhost:27017/exampleDB")
   .then(() => {
     console.log("Connecting to mongodb...");
   })
@@ -28,13 +28,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    store: new MemoryStore({
-      checkPeriod: 86400000, // prune expired entries every 24h
-    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 86400000 },
+    cookie: { secure: false },
   })
 );
 app.use(passport.initialize());
@@ -51,6 +48,9 @@ app.use((req, res, next) => {
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 
+app.get("/about", (req, res) => {
+  return res.render("about", { user: req.user });
+});
 app.get("/", (req, res) => {
   return res.render("index", { user: req.user });
 });
