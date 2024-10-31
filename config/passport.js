@@ -17,7 +17,7 @@ passport.deserializeUser(async (_id, done) => {
   let foundUser = await User.findOne({ _id });
   done(null, foundUser); // 將req.user這個屬性設定為foundUser
 });
-
+// Google登入的strategy
 passport.use(
   new GoogleStrategy(
     {
@@ -50,7 +50,7 @@ passport.use(
     }
   )
 );
-
+// 本地登入的strategy
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     let foundUser = await User.findOne({ email: username });
