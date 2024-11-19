@@ -55,7 +55,6 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     let foundUser = await User.findOne({ email: username });
     if (foundUser) {
-      foundUser.veri;
       let result = await bcrypt.compare(password, foundUser.password);
       if (result) {
         done(null, foundUser);
