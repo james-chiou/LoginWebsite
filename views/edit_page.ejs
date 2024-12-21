@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("partials/header") %>
+    <title>Post</title>
+  </head>
+  <body>
+    <%- include ("partials/nav") %>
+    <main style="padding: 3rem">
+      <%- include ("partials/message") %>
+      <form action="/profile/<%= foundPost._id %>?_method=PUT" method="POST">
+        <div class="form-group">
+          <label for="exampleforTitle">標題：<%= foundPost.title %></label>
+          <input
+            name="title"
+            type="text"
+            class="form-control"
+            id="exampleforTitle"
+            value="<%= foundPost.title %>"
+          />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="exampleforContent">內容：</label>
+          <textarea
+            class="form-control"
+            id="exampleforContent"
+            name="content"
+          ><%= foundPost.content %></textarea>
+        <br />
+        <button type="submit" class="btn btn-primary">更新文章</button>
+      </form>
+    </main>
+  </body>
+</html>

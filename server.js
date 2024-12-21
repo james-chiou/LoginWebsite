@@ -9,12 +9,12 @@ require("./config/passport");
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("connect-flash");
-const MemoryStore = require("memorystore")(session);
+const methodOverride = require("method-override");
 
 // 連結MongoDB
 mongoose
-  .connect(process.env.MONGODB_CONNECTION)
-  //.connect("mongodb://localhost:27017/exampleDB")
+  // .connect(process.env.MONGODB_CONNECTION)
+  .connect("mongodb://localhost:27017/exampleDB")
   .then(() => {
     console.log("Connecting to mongodb...");
   })
@@ -27,6 +27,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -45,10 +46,25 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(methodOverride("_method"));
+
+app.use(function (req, res, next) {
+  // 這個中間件會呼叫每個請求
+  // 檢查了請求的查詢屬性
+  // 如果 _method 存在
+  // 那我們知道，客戶端需要呼叫 DELETE 請求
+  if (req.query._method == "DELETE") {
+    // 改變原來的method
+    // 進入 DELETE 方法
+    req.method = "DELETE";
+    // 並將請求的 url 設定為 req.path 路徑
+    req.url = req.path;
+  }
+  next();
+});
 // 設定routes
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
-
 app.get("/about", (req, res) => {
   return res.render("about", { user: req.user });
 });

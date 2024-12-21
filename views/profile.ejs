@@ -41,6 +41,8 @@
           <h5 class="card-title"><%= posts[i].title %></h5>
           <p class="card-text"><%- posts[i].content %></p>
           <a href="#" class="btn btn-primary"><%= posts[i].date %> </a>
+          <a href="/profile/<%= posts[i]._id %>/edit">編輯文章</a>
+          <a href="/profile/<%= posts[i]._id %>?_method=DELETE">刪除文章</a>
         </div>
       </div>
       <% } %>
