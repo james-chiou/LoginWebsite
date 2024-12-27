@@ -1,0 +1,7 @@
+本專案Server框架為Experss.js
+OAth2.0與Passport.js實現第三方授權登入(本專案為Google登入)
+同時實現本地登入系統
+MongoDB儲存會員資料
+EJS製作出註冊/登入/個人頁面/發布文章等畫面
+使用者資料相關RESTful API
+得到會員資料
