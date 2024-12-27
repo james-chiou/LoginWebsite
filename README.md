@@ -18,5 +18,5 @@
    6.3 發布文章 POST "/post"  
    6.4 進入編輯文章 GET "/{post_id}/edit"  
    6.5 編輯文章 PUT "/{post_id}"  
-   6.6 刪除文章 DELETE "/{post_id}"
+   6.6 刪除文章 DELETE "/{post_id}"  
    6.7 使用method-override套件解決HTML form無法傳送PUT/PATCH/DELETE的問題
