@@ -36,13 +36,35 @@
 
     <section class="posts">
       <% for (let i = 0; i < posts.length; i++) { %>
-      <div class="card" style="width: 18rem; margin: 1rem">
+      <div
+        class="card border-info"
+        style="width: 18rem; margin: 1rem; border-width: 3px"
+      >
         <div class="card-body">
           <h5 class="card-title"><%= posts[i].title %></h5>
           <p class="card-text"><%- posts[i].content %></p>
-          <a href="#" class="btn btn-primary"><%= posts[i].date %> </a>
-          <a href="/profile/<%= posts[i]._id %>/edit">編輯文章</a>
-          <a href="/profile/<%= posts[i]._id %>?_method=DELETE">刪除文章</a>
+          <span
+            class="bg-secondary mb-2 rounder"
+            style="
+              display: inline-block;
+              padding: 5px 10px;
+              text-align: center;
+              border-radius: 4px;
+            "
+            ><%= posts[i].date %></span
+          >
+          <!-- 刪除文章按鈕 -->
+          <a
+            class="btn btn-outline-danger float-end ms-2"
+            href="/profile/<%= posts[i]._id %>?_method=DELETE"
+            >刪除文章</a
+          >
+          <!-- 編輯文章按鈕 -->
+          <a
+            class="btn btn-success float-end"
+            href="/profile/<%= posts[i]._id %>/edit"
+            >編輯文章</a
+          >
         </div>
       </div>
       <% } %>
