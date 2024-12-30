@@ -6,6 +6,7 @@
 1. 讓使用者能夠選擇本地登入或是Google登入  
    <img src="public/project7-2.jpg" width="60%"/>
 3. 登入後，使用者能夠發布文章，且管理過去發布過得文章
+   <img src="public/project7-3.jpg" width="60%"/>
 ## 套件
 1. Express
 2. dotenv
